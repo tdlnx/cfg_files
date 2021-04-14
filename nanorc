@@ -1,0 +1,19 @@
+# Copy to ~/.nanorc
+
+set linenumbers
+set softwrap
+set atblanks
+set backup
+set backupdir "~/.nanoBackups"
+set mouse
+set tabsize 4
+set emptyline
+set indicator
+set matchbrackets "(<[{)>]}"
+set smarthome
+# set nohelp
+set titlecolor white,black
+set keycolor white,black
+set errorcolor red,black
+set numbercolor lagoon,black
+set statuscolor white,black
