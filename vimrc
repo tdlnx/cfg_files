@@ -1,113 +1,167 @@
-" ===[ TRAVIS'S CUSTOM VIMRC ]===
+" [ Travis's Custom .vimrc ]
 
-set nocompatible                                                                                                    " disregard vi compatibility because reasons
-set showcmd		                                                                                                    " show (partial) command in status line.
-set showmatch		                                                                                                " show matching brackets.
-set smartcase		                                                                                                " do case insensitive matching on lowercase queries
-set incsearch		                                                                                                " incremental search
-set mouse=a		                                                                                                    " enable mouse usage (all modes)
-set number                                                                                                          " enable line numbers
-set numberwidth=5                                                                                                   " set width of the number bar
-set autoindent                                                                                                      " keep indentation
-set expandtab                                                                                                       " use spaces instead of tabs
-set tabstop=4                                                                                                       " set tabs to 4 spaces
-set shiftwidth=4                                                                                                    " indentations are 4 spaces
-set hlsearch                                                                                                        " highlight search results
-set ruler                                                                                                           " always show the cursor location in the statusbar
-set wildmenu                                                                                                        " show popup menu for function completion
-set cursorline                                                                                                      " highlight the cursor's current line
-set title                                                                                                           " set filename as the terminal title
-set confirm                                                                                                         " add confirmation dialogue when exiting and changes aren't saved
-set encoding=utf-8                                                                                                  " set utf-8 encoding
+" [ Base ]
+set nocompatible
+set showcmd
+set showmatch
+set smartcase
+set incsearch
+set number
+set relativenumber
+set numberwidth=5
+set autoindent
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set hlsearch
+set ruler
+set wildmenu
+set cursorline
+set title
+set confirm
+set encoding=UTF-8
 set backspace=indent,eol,start
-set splitbelow                                                                                                      " window splits are below the current window
+set splitbelow
 set conceallevel=3
-" set colorcolumn=80                                                                                                  " 80 character column for measuring line lengths
-" set spell                                                                                                           " spell checking
-" set clipboard=unnamedplus 																						  " use system clipboard
+set laststatus=2
 
-" Install vim-plug if not found
+" [ Plug Configuration ]
+" -> Install Vim Plug if it's missing
 if empty(glob('~/.vim/autoload/plug.vim'))
-	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-		\ raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 endif
 
-" Run PlugInstall if plugins are missing
+" -> Run PlugInstall automatically if plugins have changed
 autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-		\| PlugInstall --sync | source $MYVIMRC
-	\| endif
+            \| PlugInstall --sync | source $MYVIMRC
+        \| endif
 
-" Put plugins below
+" [ Installed Plugins ]
 call plug#begin('~/.vim/plugged')
 
-" Syntax
-Plug 'sheerun/vim-polyglot'                                                                                         " syntax highlighting for multiple languages
-Plug 'chivalry/filemaker.vim'                                                                                       " FileMaker syntax highlighting
+" { Syntax Highlighting }
+Plug 'sheerun/vim-polyglot'
+Plug 'posva/vim-vue'
+Plug 'chivalry/filemaker.vim'
+Plug 'ap/vim-css-color'
+Plug 'pangloss/vim-javascript'
 
-" Look and Feel
-Plug 'itchyny/lightline.vim'                                                                                        " lightweight statusbar replacement
-Plug 'bling/vim-bufferline'                                                                                         " show open buffers in the statusline 
-Plug 'majutsushi/tagbar'                                                                                            " get overall view of the file structure (requires Exuberant Ctags)
-Plug 'Yggdroot/indentLine'                                                                                          " visual line indentation reference
-Plug 'scrooloose/nerdtree'                                                                                          " left-aligned file viewer
-Plug 'scrooloose/nerdtree-project-plugin'                                                                           " project support for NERDTree
-Plug 'PhilRunninger/nerdtree-buffer-ops'                                                                            " buffer options for NERDTree
-Plug 'PhilRunninger/nerdtree-visual-selection'                                                                      " visual selector for NERDTree
-Plug 'Xuyuanp/nerdtree-git-plugin'                                                                                  " NERDTree GitHub support
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight' 																		" fancy colors for NERDTree
-Plug 'ryanoasis/vim-devicons'                                                                                       " view devIcons in NERDTree
+" { Code Snippets/Completion }
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
+Plug 'grvcoelho/vim-javascript-snippets'
+Plug 'mattn/emmet-vim'
+Plug 'Valloric/YouCompleteMe'
 
-" Extended Functionality
-Plug 'jiangmiao/auto-pairs'                                                                                         " automatic bracket pairing
-Plug 'moll/vim-bbye'                                                                                                " close buffers without exiting VIM
-Plug 'mattn/emmet-vim'                                                                                              " autocomplete for HTML and more
-Plug 'airblade/vim-gitgutter'                                                                                       " show modifications to git controlled files
-Plug 'dyng/ctrlsf.vim'                                                                                              " file searching tool (requires ack)
-Plug 'tpope/vim-fugitive' 																							" git version control helper
-Plug 'junegunn/fzf', {'do': {-> fzf#install()}} 																	" fuzzy searching (installs latest binary)
-Plug 'junegunn/fzf.vim' 																							" fuzzy searching
-Plug 'ludovicchabant/vim-gutentags' 																				" automatic tag management
-Plug 'skywind3000/gutentags_plus' 																					" automatic tag management
-Plug 'tpope/vim-commentary' 																						" comment stuff out 
-Plug 'wincent/ferret' 																								" multi-file search
+" { General Quality of Life Improvements }
+Plug 'jiangmiao/auto-pairs'
+Plug 'Yggdroot/indentLine'
+Plug 'moll/vim-bbye'
+Plug 'junegunn/fzf', {'do': {-> fzf#install()}}
+Plug 'junegunn/fzf.vim'
+Plug 'mileszs/ack.vim'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'skywind3000/gutentags_plus'
+Plug 'majutsushi/tagbar'
+Plug 'tpope/vim-commentary'
+Plug 'airblade/vim-gitgutter'
+Plug 'tyru/open-browser.vim'
+Plug 'w0rp/ale'
+Plug 'christoomey/vim-system-copy'
 
-" PHP Specific Plugins
-Plug 'StanAngeloff/php.vim' 																						" better PHP syntax highlighting
-Plug 'stephpy/vim-php-cs-fixer' 																					" make your PHP code prettier
-Plug 'ncm2/ncm2' 																									" -
-Plug 'phpactor/phpactor' 																							" |: PHP auto-completion
-Plug 'phpactor/ncm2-phpactor' 																						" -
-Plug 'neomake/neomake' 																								" alert you of mistakes and coding errors
+" { Look and Feel }
+Plug 'itchyny/lightline.vim'
+Plug 'bling/vim-bufferline'
+Plug 'jacoborus/tender.vim'
+Plug 'mhinz/vim-startify'
 
-" Misc
-Plug 'mhinz/vim-startify' 																							" fancy startup screen
-Plug 'https://github.com/yoshi1123/vim-mtg'                                                                         " MTG builder
-Plug 'jacoborus/tender.vim' 																						" tender colorscheme
+" { NERDTree Specific }
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
+
+" { Writing  }
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
+
+" { Extra }
+Plug 'vimwiki/vimwiki'
+Plug 'mattn/calendar-vim'
 
 call plug#end()
 
-" ===[ COLORSCHEME CONFIGURATION ]===
+" [[ Plugin Descriptions ]] -> For more info just google it
+" ------------------------------------------------------------------------.
+" -> vim-polyglot    | Syntax highlighting for a bunch of languages       |
+" -> vim-vue         | Syntax highlighting for Vue.js                     |
+" -> filemaker       | Syntax highlighting for FileMaker                  |
+" -> vim-javascript  | Better JavaScript syntax highlighting              |
+" -> vim-css-color   | Highlight CSS colors in .css files                 |
+" -> auto-pairs      | Auto add closing brackets/quotes/etc               |
+" -> emmet-vim       | Emmet HTML/CSS snippets                            |
+" -> indentLine      | Visualize line indentation                         |
+" -> vim-bbye        | Close a buffer without closing Vim                 |
+" -> fzf             | Fuzzy file searching                               |
+" -> ack             | Ack search recursively in the current directory    |
+" -> vim-gutentags   | Automatically handle ctags                         |
+" -> gitentags_plus  | Enhanced ctag handling for vim-gutentags           |
+" -> tagbar          | Toggle panel showing all tags in current file      |
+" -> vim-commentary  | Easily comment out blocks of code                  |
+" -> vim-gitgutter   | Visualize changes in Git monitored directories     |
+" -> lightline       | Lightweight statusbar replacement                  |
+" -> vim-bufferline  | Show open buffers beneath the statusbar            |
+" -> tender          | A nice color scheme                                |
+" -> vim-startify    | Vim start page with MRU file selection             |
+" -> nerdtree        | Toggle a traditional right-aligned file browser    |
+" -> nerdtree-git    | Visualize changed to Git managed files in NERDTree |
+" -> nerdtree-syntax | Highlight files based on type in NERDTree          |
+" -> goyo            | Distraction-free writing in Vim                    |
+" -> limelight       | Single paragraph highlighting when using Goyo      |
+" -> vimwiki         | Personal wiki inside Vim                           |
+" -> calendar        | A calendar inside Vim                              |
+" -> vim-snipmate    | Code snippet manager                               |
+" -> js-snippets     | Javascript specific code snippets                  |
+" -> ale             | Lint plugin for Vim (used ESLint)                  |
+" -> vim-system-copy | Copy text to your system clipboard                 |
+" -> youcompleteme   | code auto-completion (Required addl config)        |
+" ------------------------------------------------------------------------'
+
+" [ Individual Plugin Configurations ]
+
+" { Theme }
 colorscheme tender
-" set background=dark
-" set background=light
 
-" ===[ NERDTree CONFIGURATION ]===
-nnoremap <C-p> :wincmd p<CR>
-nnoremap <c-t> :NERDTreeFocus<CR>
-autocmd VimEnter * NERDTree | wincmd p                                                                              " Auto-Start NERDTree
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
-	\ quit | endif                                                                                                  " Close NERDTree if the tree is the last remaining buffer
-autocmd BufWinEnter * silent NERDTreeMirror                                                                         " Show NERDTree in new tabs automatically
-
-" ===[ LIGHTLINE CONFIGURATION ]===
+" { Lightline }
 set noshowmode
 let g:lightline = {
     \ 'colorscheme': 'tender',
     \ }
 
-" ===[ TAGBAR CONFIGURATION ]===
-nmap <F8> :TagbarToggle<CR>
+" { Goyo/Limelight  }
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
 
-" ===[ INDENTLINE CONFIGURATION ]===
-let g:indentLine_char_list = ['|', '¦', '┆', '┊'] 																	" set indentation characters
-let g:indentLine_enable = 0 																						" disable by default
+" { Snipmate }
+let g:snipMate = { 'snippet_version': 1 } 
+imap <C-J> <esc>a<Plug>snipMateNextOrTrigger
+smap <C-J> <Plug>snipMateNextOrTrigger
+
+" { Ale/ESLint  }
+let b:ale_fixers = ['eslint']
+let g:ale_fix_on_save = 1
+
+" { Vimwiki }
+filetype plugin on
+syntax on
+let g:vimwiki_list = [{'path': '$HOME/Dropbox/vimwiki/', 'syntax': 'markdown'}]
+
+" [ Custom Shortcuts ]
+map <silent> <F8> :TagbarToggle<CR>
+map <silent> <F6> :Goyo<CR>
+map <silent> <F4> :Bdelete<CR> 
+map <silent> <F3> :NERDTreeToggle<CR>
+map <silent> <F2> :Files<CR>
+
+" [[ END ]]
