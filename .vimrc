@@ -21,11 +21,11 @@ set relativenumber
 set autoindent
 set nowrap
 set expandtab
+" set cursorline
+" set cursorcolumn
 set hlsearch
 set ruler
 set wildmenu
-"set cursorline
-"set cursorcolumn
 set title
 set confirm
 set splitbelow
@@ -94,20 +94,17 @@ Plug 'junegunn/limelight.vim'
 
 " { Extra }
 Plug 'vimwiki/vimwiki'
-Plug 'mattn/calendar-vim'
 
 call plug#end()
 
 " [[ Plugin Descriptions ]] -> For more info just google it
+" [ -- also check out vimawesome.com for more plugins -- ]
 " ------------------------------------------------------------------------.
 " -> vim-polyglot    | Syntax highlighting for a bunch of languages       |
-" -> vim-vue         | Syntax highlighting for Vue.js                     |
 " -> filemaker       | Syntax highlighting for FileMaker                  |
-" -> vim-javascript  | Better JavaScript syntax highlighting              |
 " -> auto-pairs      | Auto add closing brackets/quotes/etc               |
 " -> emmet-vim       | Emmet HTML/CSS snippets                            |
 " -> indentLine      | Visualize line indentation                         |
-" -> vim-bbye        | Close a buffer without closing Vim                 |
 " -> fzf             | Fuzzy file searching                               |
 " -> ack             | Ack search recursively in the current directory    |
 " -> vim-gutentags   | Automatically handle ctags                         |
@@ -120,19 +117,11 @@ call plug#end()
 " -> tender          | A nice color scheme                                |
 " -> vim-startify    | Vim start page with MRU file selection             |
 " -> nerdtree        | Toggle a traditional right-aligned file browser    |
-" -> nerdtree-git    | Visualize changed to Git managed files in NERDTree |
-" -> nerdtree-syntax | Highlight files based on type in NERDTree          |
 " -> goyo            | Distraction-free writing in Vim                    |
 " -> limelight       | Single paragraph highlighting when using Goyo      |
 " -> vimwiki         | Personal wiki inside Vim                           |
-" -> calendar        | A calendar inside Vim                              |
-" -> vim-snipmate    | Code snippet manager                               |
-" -> js-snippets     | Javascript specific code snippets                  |
 " -> ale             | Lint plugin for Vim (used ESLint)                  |
 " -> vim-system-copy | Copy text to your system clipboard                 |
-" -> vim-visual-multi| Multiple cursors a-la Sublime or VS Code           |
-" -> youcompleteme   | code auto-completion (Required addl config)        |
-" -> dash            | Dash documentation library shortcut                |
 " ------------------------------------------------------------------------'
 
 " [[ Coc Extensions ]] -> Install with :CocInstall [extension]
@@ -169,7 +158,7 @@ let b:ale_fixers = ['eslint']
 let g:ale_fix_on_save = 1
 
 " { Vimwiki }
-let g:vimwiki_list = [{'path': '$HOME/Dropbox/vimwiki/', 'syntax': 'markdown'}]
+let g:vimwiki_list = [{'path': '$HOME/.vimwiki/', 'syntax': 'markdown'}]
 
 " [ Custom Keybindings ]
 "-> Navigate splits with CTRL+hjkl
@@ -178,17 +167,17 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-l> <c-w>l
 
-"-> On MacOS, disable system CRTL+arrow shortcuts first
-"-> Resize splits with CTRL+arrows
-nnoremap <c-up> <c-w>+
-nnoremap <c-down> <c-w>-
-nnoremap <c-left> <c-w>>
-nnoremap <c-right> <c-w><
+"-> Resize splits with CTRL+wsad
+nnoremap <c-s> <c-w>+
+nnoremap <c-w> <c-w>-
+nnoremap <c-d> <c-w>>
+nnoremap <c-a> <c-w><
 
 " [ Custom Shortcuts ]
 map <silent> <F8> :TagbarToggle<CR>
+map <silent> <F7> :terminal<CR>
 map <silent> <F6> :Goyo<CR>
-map <silent> <F4> :Bdelete<CR> 
+map <silent> <F4> :terminal cal<CR> 
 map <silent> <F3> :NERDTreeToggle<CR>
 map <silent> <F2> :Files<CR>
 
