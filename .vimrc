@@ -21,8 +21,8 @@ set relativenumber
 set autoindent
 set nowrap
 set expandtab
-" set cursorline
-" set cursorcolumn
+"set cursorline
+"set cursorcolumn
 set hlsearch
 set ruler
 set wildmenu
@@ -33,8 +33,8 @@ set backspace=indent,eol,start
 set wildmode=list:longest
 set history=1000
 set encoding=UTF-8
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 set conceallevel=3
 set numberwidth=5
 set scrolloff=10
@@ -78,10 +78,13 @@ Plug 'ludovicchabant/vim-gutentags'
 Plug 'skywind3000/gutentags_plus'
 Plug 'majutsushi/tagbar'
 Plug 'tpope/vim-commentary'
+Plug 'suy/vim-context-commentstring'
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
 Plug 'w0rp/ale'
 Plug 'christoomey/vim-system-copy'
 Plug 'scrooloose/nerdtree'
+Plug 'terryma/vim-multiple-cursors'
 
 " { Look and Feel }
 Plug 'itchyny/lightline.vim'
@@ -122,6 +125,8 @@ call plug#end()
 " -> vimwiki         | Personal wiki inside Vim                           |
 " -> ale             | Lint plugin for Vim (used ESLint)                  |
 " -> vim-system-copy | Copy text to your system clipboard                 |
+" -> multi-cursors   | vim-multiple-cursors - add multiple cursors        |
+" -> vim-fugitive    | Git integration for VIM                            |
 " ------------------------------------------------------------------------'
 
 " [[ Coc Extensions ]] -> Install with :CocInstall [extension]
@@ -160,6 +165,19 @@ let g:ale_fix_on_save = 1
 " { Vimwiki }
 let g:vimwiki_list = [{'path': '$HOME/.vimwiki/', 'syntax': 'markdown'}]
 
+" { Vim-Multiple-Cursors }
+let g:multi_cursor_use_default_mapping=1
+
+" Protip: when you select words press'I' for insert not 'i'
+"let g:multi_cursor_start_word_key       = '<C-n>'
+"let g:multi_cursor_select_all_word_key  = '<A-n>'
+"let g:multi_cursor_start_key            = 'g<C-n>'
+"let g:multi_cursor_select_all_key       = 'g<A-n>'
+"let g:multi_cursor_next_key             = '<C-n>'
+"let g:multi_cursor_prev_key             = '<C-p>'
+"let g:multi_cursor_skip_key             = '<C-x>'
+"let g:multi_cursor_quit_key             = '<Esc>'
+
 " [ Custom Keybindings ]
 "-> Navigate splits with CTRL+hjkl
 nnoremap <c-h> <c-w>h 
@@ -177,7 +195,7 @@ nnoremap <c-a> <c-w><
 map <silent> <F8> :TagbarToggle<CR>
 map <silent> <F7> :terminal<CR>
 map <silent> <F6> :Goyo<CR>
-map <silent> <F4> :terminal cal<CR> 
+map <silent> <F4> \ww<CR> 
 map <silent> <F3> :NERDTreeToggle<CR>
 map <silent> <F2> :Files<CR>
 
